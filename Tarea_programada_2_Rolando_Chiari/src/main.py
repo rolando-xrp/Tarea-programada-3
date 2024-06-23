@@ -72,7 +72,7 @@ try:
     asunto = input('Digite el asunto del correo: ')
     mensaje_saludo = input('Digite el mensaje de saludo: ')
     password = input('Digite su contraseña para poder enviar el correo: ')
-    info_cantidad_imagenes = f'se enviaron {cantidad_imagenes} imagenes y '
+    info_cantidad_imagenes = f' se enviaron {cantidad_imagenes} imagenes y '
     info_cambios = 'Los cambios realizados a las imagenes son: '
     for i in lista_seleccion:
         info_cambios = info_cambios + i
