@@ -18,33 +18,46 @@ print('----'*50)
 
 url_credenciales = 'https://python-course.lat/image-app/api-token-auth/'
 url_fotos = 'https://python-course.lat/image-app/images/'
-try:
-    cantidad_imagenes = numero_imagenes(int(input('Digite el numero de imagenes que desea descargar: ')))
-except Exception as e:
-    print(f'El error es: {e}')
-    errores.error(f'El error es: {e}')
 
-token = peticion_credenciales(url_credenciales)
-lista_urls = peticion_imagenes(cantidad_imagenes,token,url_fotos)
-carpeta_con_imagenes = carpeta_imagenes()
+bandera_1 = True
+while bandera_1:
+    try:
+        cantidad_imagenes = numero_imagenes(int(input('Digite el numero de imagenes que desea descargar: ')))
+        if cantidad_imagenes >= 1 and cantidad_imagenes <=10:
+            token = peticion_credenciales(url_credenciales)
+            lista_urls = peticion_imagenes(cantidad_imagenes,token,url_fotos)
+            carpeta_con_imagenes = carpeta_imagenes()
+            lista_imagenes = []
+            for i in range(0,cantidad_imagenes):
+                picture = threading.Thread(target=imagen, args=(lista_urls,i))
+                lista_imagenes.append(picture)
+            for i in lista_imagenes:
+                i.start()
+            bandera_1 = False
+        else:
+            print('Ingrese un numero entre el 1 y el 10')
 
-lista_imagenes = []
-for i in range(0,cantidad_imagenes):
-    picture = threading.Thread(target=imagen, args=(lista_urls,i))
-    lista_imagenes.append(picture)
-for i in lista_imagenes:
-    i.start()
+    except Exception as e:
+        print(f'El error es: {e}, por favor ingrese un numero')
+        errores.error(f'El error es: {e}')
+
+
 print('----'*50)
 print('A continuacion se le va a presentar una lista con los cambios que puede realizarle a las imagenes')
 print('Blanco y negro, Transponer, Difuminar, Rotar 90 grados en sentido horario')
 print('----'*50)
 lista_seleccion = []
-try:
-    numero_cambios = int(input('Digite un numero de 1 al 4 dependiendo de la cantidad de cambios que desea realizar: '))
-    if numero_cambios < 0 or numero_cambios > 4:
-        print('Digite un numero entre 0 y 4')
-except Exception as e:
-    print(f'El error es {e}')
+
+bandera_2 = True
+while bandera_2:    
+    try:
+        numero_cambios = int(input('Digite un numero de 0 al 4 dependiendo de la cantidad de cambios que desea realizar: '))
+        if numero_cambios < 0 or numero_cambios > 4:
+            print('Digite un numero entre 0 y 4')
+        else:
+            bandera_2 = False
+    except Exception as e:
+        print(f'El error es {e}, ingrese un numero valido')
 
 while numero_cambios > 0:
     try:
