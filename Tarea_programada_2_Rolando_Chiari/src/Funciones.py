@@ -1,5 +1,5 @@
-from PIL import Image,ImageFilter # type: ignore
-import requests # type: ignore
+from PIL import Image,ImageFilter 
+import requests 
 import logging
 import os
 import shutil
@@ -26,7 +26,8 @@ def numero_imagenes(numero):
     if numero >= 1 and numero <= 10:
         return numero
     else:
-        print (f'El numero digitado {numero}, no esta entre 1 y 10, porfavor seleccione un numero dentro de este rango')
+        a = print(f'El numero digitado {numero}, no esta entre 1 y 10, porfavor seleccione un numero dentro de este rango')
+        return a
 
 def peticion_credenciales(url):
     '''
